@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import './navigation.dart';
-import './hero.dart';
-import './circle_button.dart';
+import 'navigation.dart';
+import 'hero.dart';
+import 'circle_button.dart';
+import 'dialog.dart';
 
 void main() => runApp(MyApp());
 
@@ -61,6 +62,15 @@ class HomePage extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => CircleButtonScreen())
+              );
+            },
+          ),
+          ListTile(
+            title: Text('dialog'),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DialogScreen())
               );
             },
           ),
