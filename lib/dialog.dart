@@ -78,8 +78,8 @@ class DialogScreen extends StatelessWidget {
     );
   }
 
-  void showDialogWithResult(BuildContext context) {
-    showDialog(
+  Future showDialogWithResult(BuildContext context) async {
+    var result = await showDialog<DialogActionType>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
           title: const Text("Title"),
@@ -95,16 +95,16 @@ class DialogScreen extends StatelessWidget {
             )
           ],
         )
-    ).then((value) {
-      switch (value) {
-        case DialogActionType.cancel:
-          print("cancel");
-          break;
+    );
 
-        case DialogActionType.ok:
-          print("ok");
-          break;
-      }
-    });
+    switch (result) {
+      case DialogActionType.cancel:
+        print("cancel");
+        break;
+
+      case DialogActionType.ok:
+        print("ok");
+        break;
+    }
   }
 }
