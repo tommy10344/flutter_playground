@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-enum DialogActionType {
+enum AlertDialogResult {
   cancel,
   ok,
+}
+
+enum SimpleDialogResult {
+  first,
+  second,
+  third,
 }
 
 class DialogScreen extends StatelessWidget {
@@ -26,6 +32,10 @@ class DialogScreen extends StatelessWidget {
               ListTile(
                   title: Text('Alert Dialog with result'),
                   onTap: () { _showAlertDialogWithResult(context); }
+              ),
+              ListTile(
+                  title: Text('Simple Dialog'),
+                  onTap: () { _showSimpleDialog(context); }
               ),
             ]
         )
@@ -79,7 +89,7 @@ class DialogScreen extends StatelessWidget {
   }
 
   Future _showAlertDialogWithResult(BuildContext context) async {
-    var result = await showDialog<DialogActionType>(
+    var result = await showDialog<AlertDialogResult>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
           title: const Text("Title"),
@@ -87,23 +97,60 @@ class DialogScreen extends StatelessWidget {
           actions: <Widget>[
             new FlatButton(
                 child: const Text('CANCEL'),
-                onPressed: () { Navigator.pop(context, DialogActionType.cancel); }
+                onPressed: () { Navigator.pop(context, AlertDialogResult.cancel); }
             ),
             new FlatButton(
                 child: const Text('OK'),
-                onPressed: () { Navigator.pop(context, DialogActionType.ok); }
+                onPressed: () { Navigator.pop(context, AlertDialogResult.ok); }
             )
           ],
         )
     );
 
     switch (result) {
-      case DialogActionType.cancel:
+      case AlertDialogResult.cancel:
         print("cancel");
         break;
 
-      case DialogActionType.ok:
+      case AlertDialogResult.ok:
         print("ok");
+        break;
+    }
+  }
+
+  Future _showSimpleDialog(BuildContext context) async {
+    var result = await showDialog<SimpleDialogResult>(
+        context: context,
+        builder: (BuildContext context) => SimpleDialog(
+          title: const Text("Title"),
+          children: <Widget>[
+            SimpleDialogOption(
+              child: const Text('First'),
+              onPressed: () { Navigator.pop(context, SimpleDialogResult.first); },
+            ),
+            SimpleDialogOption(
+              child: const Text('Second'),
+              onPressed: () { Navigator.pop(context, SimpleDialogResult.second); },
+            ),
+            SimpleDialogOption(
+              child: const Text('Third'),
+              onPressed: () { Navigator.pop(context, SimpleDialogResult.third); },
+            ),
+          ],
+        )
+    );
+
+    switch (result) {
+      case SimpleDialogResult.first:
+        print("first");
+        break;
+
+      case SimpleDialogResult.second:
+        print("second");
+        break;
+
+      case SimpleDialogResult.third:
+        print("third");
         break;
     }
   }
