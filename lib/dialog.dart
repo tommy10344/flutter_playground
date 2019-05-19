@@ -16,23 +16,23 @@ class DialogScreen extends StatelessWidget {
         body: ListView(
             children: <Widget>[
               ListTile(
-                  title: Text('Material Dialog'),
-                  onTap: () { showMyMaterialDialog(context); }
+                  title: Text('Alert Dialog'),
+                  onTap: () { _showAlertDialog(context); }
               ),
               ListTile(
-                  title: Text('Cupertino Dialog'),
-                  onTap: () { showMyCupertinoDialog(context); }
+                  title: Text('Cupertino Alert Dialog'),
+                  onTap: () { _showCupertinoAlertDialog(context); }
               ),
               ListTile(
-                  title: Text('Dialog with result'),
-                  onTap: () { showDialogWithResult(context); }
+                  title: Text('Alert Dialog with result'),
+                  onTap: () { _showAlertDialogWithResult(context); }
               ),
             ]
         )
     );
   }
 
-  void showMyMaterialDialog(BuildContext context) {
+  void _showAlertDialog(BuildContext context) {
     showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
@@ -52,7 +52,7 @@ class DialogScreen extends StatelessWidget {
     );
   }
 
-  void showMyCupertinoDialog(BuildContext context) {
+  void _showCupertinoAlertDialog(BuildContext context) {
     showCupertinoDialog(
         context: context,
         builder: (BuildContext context) => CupertinoAlertDialog(
@@ -78,7 +78,7 @@ class DialogScreen extends StatelessWidget {
     );
   }
 
-  Future showDialogWithResult(BuildContext context) async {
+  Future _showAlertDialogWithResult(BuildContext context) async {
     var result = await showDialog<DialogActionType>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
